@@ -1,11 +1,14 @@
 package nhom2.project.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,11 +26,9 @@ public class Customer {
 	private String city;
 	private String district;
 	private String ward;
-	
-	
-	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
-	private Bill bill;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+	private List<Bill> listBill;
 
 	public Customer() {
 		super();
@@ -36,23 +37,25 @@ public class Customer {
 		code = "";
 		phone = "";
 		address = "";
-		password="";
+		password = "";
 	}
 
-	public Customer(String name, String email, String code, String phone, String address,String password,String city,String district,String ward) {
+	public Customer(String name, String email, String code, String phone, String address, String password, String city,
+			String district, String ward) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.code = code;
 		this.phone = phone;
 		this.address = address;
-		this.password= password;
+		this.password = password;
 		this.city = city;
 		this.district = district;
 		this.ward = ward;
 	}
 
-	public Customer(int id, String name, String email, String code, String phone, String address,String password,String city,String district,String ward) {
+	public Customer(int id, String name, String email, String code, String phone, String address, String password,
+			String city, String district, String ward) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -65,7 +68,6 @@ public class Customer {
 		this.district = district;
 		this.ward = ward;
 	}
-	
 
 	public String getCity() {
 		return city;
@@ -99,12 +101,12 @@ public class Customer {
 		this.password = password;
 	}
 
-	public Bill getBill() {
-		return bill;
+	public List<Bill> getListBill() {
+		return listBill;
 	}
 
-	public void setBill(Bill bill) {
-		this.bill = bill;
+	public void setListBill(List<Bill> listBill) {
+		this.listBill = listBill;
 	}
 
 	public String getPhone() {

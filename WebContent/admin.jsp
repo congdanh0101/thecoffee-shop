@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +18,15 @@
 <link rel="stylesheet" href="css/shop.css">
 <link rel="stylesheet" href="css/style.css">
 <title>TCS Administrator</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png" type="image/x-icon">
+<link rel="icon"
+	href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png"
+	type="image/x-icon">
 
 </head>
 <body>
 	<nav class="navbar-shop">
-		<a href="admin.jsp"> <img src="resource/img/logo.png" alt="photo"
-			class="logo" style="width: 100px; margin-top: 5px;">
+		<a href="admin.jsp"> <img src="resource/img/2120197.png"
+			alt="photo" class="logo" style="width: 75px; margin-top: 5px;">
 		</a>
 
 	</nav>
@@ -33,71 +36,86 @@ a {
 	color: black;
 }
 </style>
-	<div class="container admin" style="margin-top: 100px;">
-		<div class="row mt-3">
-			<!-- first col -->
-			<div class="col-md-3">
-				<!-- first box -->
-				<a href="admin?action=category">
-					<div class="card">
-						<div class="card-body text-center">
-							<div class="container">
-								<img style="max-width: 125px" class="img-fluid rounded-circle"
-									src="resource/img/Category.png" alt="category_icon">
+	<%
+		String username = "admin";
+	String password = "password";
+	%>
+	<c:choose>
+		<c:when
+			test="${sessionScope.get('admin')!=null  }">
+			<div class="container admin" style="margin-top: 100px;">
+				<div class="row mt-3">
+					<!-- first col -->
+					<div class="col-md-3">
+						<!-- first box -->
+						<a href="admin?action=category">
+							<div class="card">
+								<div class="card-body text-center">
+									<div class="container">
+										<img style="max-width: 125px" class="img-fluid rounded-circle"
+											src="resource/img/Category.png" alt="category_icon">
+									</div>
+									<h1>Category</h1>
+								</div>
 							</div>
-							<h1>Category</h1>
-						</div>
+						</a>
 					</div>
-				</a>
-			</div>
 
-			<!-- second col -->
-			<div class="col-md-3">
-				<a href="admin?action=product">
-					<div class="card text-center">
-						<div class="card-body">
-							<div class="container">
-								<img style="max-width: 125px" class="img-fluid rounded-circle"
-									src="resource/img/product.png" alt="product_icon">
+					<!-- second col -->
+					<div class="col-md-3">
+						<a href="admin?action=product">
+							<div class="card text-center">
+								<div class="card-body">
+									<div class="container">
+										<img style="max-width: 125px" class="img-fluid rounded-circle"
+											src="resource/img/product.png" alt="product_icon">
+									</div>
+									<h1>Products</h1>
+
+								</div>
+
 							</div>
-							<h1>Products</h1>
-
-						</div>
+						</a>
 
 					</div>
-				</a>
 
-			</div>
-
-			<!-- third col -->
-			<div class="col-md-3">
-				<a href="admin?action=bill">
-					<div class="card">
-						<div class="card-body text-center">
-							<div class="container">
-								<img style="max-width: 100px" class="img-fluid rounded-circle"
-									src="resource/img/bill.png" alt="bill_icon">
+					<!-- third col -->
+					<div class="col-md-3">
+						<a href="admin?action=bill">
+							<div class="card">
+								<div class="card-body text-center">
+									<div class="container">
+										<img style="max-width: 100px" class="img-fluid rounded-circle"
+											src="resource/img/bill.png" alt="bill_icon">
+									</div>
+									<h1>Bills</h1>
+								</div>
 							</div>
-							<h1>Bills</h1>
-						</div>
+						</a>
 					</div>
-				</a>
-			</div>
-			<div class="col-md-3">
-				<a href="admin?action=customer">
-					<div class="card">
-						<div class="card-body text-center">
-							<div class="container">
-								<img style="max-width: 100px" class="img-fluid rounded-circle"
-									src="resource/img/admin.png" alt="bill_icon">
+					<div class="col-md-3">
+						<a href="admin?action=customer">
+							<div class="card">
+								<div class="card-body text-center">
+									<div class="container">
+										<img style="max-width: 100px" class="img-fluid rounded-circle"
+											src="resource/img/admin.png" alt="bill_icon">
+									</div>
+									<h1>Customer</h1>
+								</div>
 							</div>
-							<h1>Customer</h1>
-						</div>
+						</a>
 					</div>
-				</a>
+				</div>
+				<!-- second row -->
 			</div>
-		</div>
-		<!-- second row -->
-	</div>
+		</c:when>
+		<c:otherwise>
+			<%
+				response.sendRedirect("admin_login.jsp");
+			%>
+		</c:otherwise>
+	</c:choose>
+
 </body>
 </html>

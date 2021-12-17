@@ -30,9 +30,11 @@
 					<th scope="col">#</th>
 					<th scope="col">Name</th>
 					<th scope="col">Address</th>
+					<th scope="col">Ward</th>
+					<th scope="col">District</th>
+					<th scope="col">City</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Email</th>
-					<th scope="col">Comment</th>
 					
 				</tr>
 			</thead>
@@ -42,10 +44,11 @@
 					<th scope="row">${item.getId() }</th>
 					<td>${item.getName() }</td>
 					<td>${item.getAddress() }</td>
+					<td>${item.ward }</td>
+					<td>${item.district }</td>
+					<td>${item.city }</td>
 					<td>${item.getPhone() }</td>
 					<td>${item.getEmail() }</td>
-					<td>${item.getComment() }</td>
-					
 				</tr>
 			</c:forEach>
 				

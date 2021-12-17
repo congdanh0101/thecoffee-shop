@@ -33,8 +33,6 @@ public class CheckoutController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ServletContext sc = getServletContext(); 
         HttpSession session = req.getSession();
-        
-        
         sc.getRequestDispatcher("/checkout.jsp").forward(req, resp);
        
 	}

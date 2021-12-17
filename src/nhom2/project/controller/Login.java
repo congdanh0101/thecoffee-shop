@@ -64,7 +64,7 @@ public class Login extends HttpServlet {
 		req.setAttribute("message", message);
 		if(req.getParameter("message")!=null)req.setAttribute("message", message);
 		System.out.println(url);
-		getServletContext().getRequestDispatcher(url).forward(req, resp);
+		
 
 
 	}
@@ -108,7 +108,7 @@ public class Login extends HttpServlet {
 		}
 	}
 
-	public void Signin(HttpServletRequest request, HttpServletResponse response) {
+	public void Signin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Customer customer = null;
 
 		String email = request.getParameter("email");
@@ -132,5 +132,6 @@ public class Login extends HttpServlet {
 		} else {
 			message = "Tài khoản không tồn tại!";
 		}
+		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 }

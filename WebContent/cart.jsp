@@ -116,11 +116,8 @@
 				<div class="h3 font-weight-semibold text-center py-3"
 					style="color: red;">${cart.getSubTotalCurrencyFormat() }</div>
 				<hr>
-				<h3 class="h6 pt-4 font-weight-semibold">
-					<span class="badge badge-success mr-2">Note</span>Thêm ghi chú cho cửa hàng
-				</h3>
-				<textarea class="form-control mb-3" id="order-comments" rows="5"></textarea>
-				<a class="btn btn-primary btn-block" href="checkout"> <svg
+				
+				<a class="btn btn-primary btn-block" href="checkout" style="float: right;"> <svg
 						xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 						viewBox="0 0 24 24" fill="none" stroke="currentColor"
 						stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

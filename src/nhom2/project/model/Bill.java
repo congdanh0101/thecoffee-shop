@@ -26,7 +26,7 @@ public class Bill {
 	@Temporal(TemporalType.TIME)
 	private Date time;
 
-	@OneToOne
+	@ManyToOne
 	private Customer customer;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "bill")

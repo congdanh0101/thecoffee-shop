@@ -17,39 +17,58 @@
 <link rel="stylesheet" href="css/shop.css">
 <link rel="stylesheet" href="css/add.css">
 <title>TCS Administrator</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png" type="image/x-icon">
+<link rel="icon"
+	href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png"
+	type="image/x-icon">
+<script type="text/javascript" src="js/edit_product.js"></script>
 </head>
 <body>
+
+	<style>
+.edit-btn {
+	width: 100%;
+	border: none;
+	text-align: left;
+}
+
+.edit-btn:hover {
+	background: rgb(116, 241, 116);
+}
+</style>
+
 	<jsp:include page="navbar_admin.jsp"></jsp:include>
 	<div class="container">
-		<div class="row"></div>
-		<table class="table table-hover table-bordered table-responsive ">
-			<h2>list of product</h2>
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Name</th>
-					<th scope="col">Price</th>
-					<th scope="col">Description</th>
-					<th scope="col">Code</th>
-					<th scope="col">Category</th>
-					<th scope="col">Remove</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="item" items="${listProduct }">
+		<div class="row">
+			<form action="${pageContext.request.contextPath}/UpdateProduct"
+				method="get" id="my_form"></form>
+			<table class="table table-hover table-bordered table-responsive ">
+				<h2>list of product</h2>
+				<thead>
 					<tr>
-						<th scope="row">${item.getId() }</th>
-						<td>${item.getName() }</td>
-						<td>${item.getPriceCurrencyFormat() }</td>
-						<td>${item.getDescription() }</td>
-						<td>${item.getCode() }</td>
-						<td>${item.getCategory().getName() }</td>
-						<td><a href="AdminProduct?pid=${item.getId() }">Remove</a></td>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Price</th>
+						<th scope="col">Description</th>
+						<th scope="col">Category</th>
+						<th scope="col">Remove</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					<c:forEach var="item" items="${listProduct }">
+						<tr>
+							<th scope="row">${item.getId() }</th>
+							<td><a href="admin_detail?pid=${item.id }">${item.name }</a></td>
+							<td>${item.getPriceCurrencyFormat() }</td>
+							<td>${item.getDescription() }</td>
+							<td>${item.category.name }</td>
+							<td><a href="AdminProduct?pid=${item.getId() }">Remove</a></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+
+			</table>
+		</div>
 	</div>
 
 	<button class="open-button" onclick="openForm()">Add product</button>
@@ -57,23 +76,15 @@
 	<div class="form-popup" id="myForm">
 		<form action="AdminProduct" class="form-container" method="post">
 
-			<label for="name"><b>Name</b></label>
-            <input type="text" placeholder="Enter name" name="name" required>
-
-            <label for="code"><b>Code</b></label>
-            <input type="text" placeholder="Enter code" name="code" >
-
-            <label for="description"><b>Description</b></label>
-            <input type="text" placeholder="Enter description" name="description" >
-
-            <label for="img"><b>Image</b></label>
-            <input type="text" placeholder="Enter image address" name="img" required>
-
-            <label for="price"><b>Price</b></label>
-            <input type="number" placeholder="Enter price" min="0" name="price" required>
-            
-            <label for="category"><b>Category</b></label>
-			<select name="category" id=""
+			<label for="name"><b>Name</b></label> <input type="text"
+				placeholder="Enter name" name="name" required> <label
+				for="description"><b>Description</b></label> <input type="text"
+				placeholder="Enter description" name="description"> <label
+				for="img"><b>Image</b></label> <input type="text"
+				placeholder="Enter image address" name="img" required> <label
+				for="price"><b>Price</b></label> <input type="number"
+				placeholder="Enter price" min="0" name="price" required> <label
+				for="category"><b>Category</b></label> <select name="category" id=""
 				style="width: 50%;">
 				<c:forEach var="item" items="${listCategory }">
 					<option value="${item.getId() }">${item.getName() }</option>

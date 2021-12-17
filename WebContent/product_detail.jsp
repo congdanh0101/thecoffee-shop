@@ -46,7 +46,7 @@
 				<div class="clearfix"></div>
 				<div class="product-description">
 					<h3>thông tin sản phẩm:</h3>
-					<p>${product.description }</p>
+					<p style="font-size: 1.2rem;">${product.description }</p>
 				</div>
 				<div class="clearfix"></div>
 				<div class="quantity-box">
@@ -95,7 +95,7 @@
 								</div>
 								<input type="hidden" name="productId" value="${product.id}">
 								<input type="submit" value="THÊM VÀO GIỎ HÀNG" name="addtocart"
-									class="btn btn-primary btn-lg" style="margin-top: 40px;'">
+									class="btn btn-primary btn-lg" style="margin-top: 2.5rem; width: 55%; font-size: 1.5rem;">
 							</form>
 						</c:when>
 
@@ -142,13 +142,12 @@
 								</div>
 								<input type="hidden" name="productId" value="${product.id}">
 								<input type="submit" value="THÊM VÀO GIỎ HÀNG" name="addtocart"
-									class="btn btn-primary btn-lg" style="margin-top: 40px;'">
+									class="btn btn-primary btn-lg" style="margin-top: 2.5rem; width: 55%; font-size: 1.5rem;">
 							</form>
 						</c:when>
 					</c:choose>
 
 				</div>
-
 
 			</div>
 </body>

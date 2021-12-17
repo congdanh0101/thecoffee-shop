@@ -1,3 +1,4 @@
+<%@page import="nhom2.project.model.Customer"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -24,7 +25,7 @@
 <body>
 <body>
 	<jsp:include page="navbar_shop.jsp"></jsp:include>
-	<form action="${pageContext.request.contextPath}/register" method="post">
+	<form action="${pageContext.request.contextPath}/pay" method="post">
 		<div class="container">
 			<div class="row">
 				<!-- panel preview -->
@@ -37,37 +38,43 @@
 									<label for="concept" class="col-sm-3 control-label">Họ và tên</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" id="fullName"
-											name="fullName" required>
+											name="fullName" required value="${customer.name }" readonly="readonly">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="description" class="col-sm-3 control-label">Email</label>
 									<div class="col-sm-9">
 										<input type="email" class="form-control" id="email"
-											name="email" required>
+											name="email" required readonly="readonly" value="${customer.email }">
 									</div>
 								</div>
 								<div class="form-group">
 									<label for="amount" class="col-sm-3 control-label">Số điện thoại</label>
 									<div class="col-sm-9">
 										<input type="number" class="form-control" id="phoneNumber"
-											name="phoneNumber" required min="100000000" max="9999999999">
+											name="phoneNumber" required min="100000000" max="9999999999" readonly="readonly" value="${customer.phone }">
 									</div>
 								</div>
+								<%
+									HttpSession ss = request.getSession();
+									Customer customer = (Customer) ss.getAttribute("customer");
+									String address = customer.getAddress() + ", " + customer.getWard() +  ", "+ customer.getDistrict()+ ", " + customer.getCity();
+								%>
 								<div class="form-group">
 									<label for="status" class="col-sm-3 control-label">Địa chỉ</label>
 									<div class="col-sm-9">
 										<input type="text" class="form-control" id="address"
-											name="address" required>
+											name="address" required readonly="readonly" value = "<%= address %>"
+											>
 									</div>
 								</div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 									<label for="status" class="col-sm-3 control-label">Ghi chú</label>
 									<div class="col-sm-9">
 										<textarea name="comment" id="" cols="30" rows="5"
 											class="form-control"></textarea>
 									</div>
-								</div>
+								</div> -->
 
 								<div class="form-group">
 									<div class="col-sm-12 text-right">
@@ -132,7 +139,15 @@
 					<div class="row text-right">
 						<div class="col-xs-12">
 							<h3 style="color: red; font-weight: bold;">
-								Tổng tiền: ${cart.getSubTotalCurrencyFormat() } <strong><span
+								Phí vận chuyển: ${cart.getFeeShipCurrencyFormat() } <strong><span
+									class="preview-total"></span></strong>
+							</h3>
+						</div>
+					</div>
+					<div class="row text-right">
+						<div class="col-xs-12">
+							<h3 style="color: red; font-weight: bold;">
+								Tổng tiền: ${cart.getSubTotalCurrencyFormatIncludeShip() } <strong><span
 									class="preview-total"></span></strong>
 							</h3>
 						</div>
@@ -144,8 +159,6 @@
 							
 								<button type="submit" class=" btn btn-primary btn-block "
 									style="width: 150px; padding: 5px 0; font-size: 1.5rem;">Xác nhận</button>
-							
-
 						</div>
 					</div>
 				</div>

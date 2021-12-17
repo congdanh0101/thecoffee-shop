@@ -85,4 +85,15 @@ public class Cart implements Serializable {
 			billdetailDAO.saveBillDetail(billdetail);
 		}
 	}
+	public String getFeeShipCurrencyFormat() {
+		DecimalFormat currency = new DecimalFormat("###,###,###");
+		return currency.format(25000) + " VNĐ";
+	}
+	
+	public String getSubTotalCurrencyFormatIncludeShip() {
+//    	Locale lc = new Locale("nv", "VN");
+//		NumberFormat currency = NumberFormat.getCurrencyInstance(lc);
+		DecimalFormat currency = new DecimalFormat("###,###,###");
+		return currency.format(this.getSubTotal()+25000) + " VNĐ";
+	}
 }

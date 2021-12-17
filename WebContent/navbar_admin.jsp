@@ -3,8 +3,8 @@
 
 	<nav class="navbar-shop">
         <a href="admin.jsp">
-            <img src="resource/img/logo.png" alt="photo"
-			class="logo" style="width: 100px; margin-top: 5px;">
+            <img src="resource/img/2120197.png" alt="photo"
+		class="logo" style="width: 75px; margin-top: 5px;">
         </a>
         <ul class="main_nav">
             <li><a href="admin?action=category">Category</a></li>

@@ -117,7 +117,7 @@ public class ProductDAO {
 //				Query query = ss.createQuery(hql);
 //				query.setParameter("id", id);
 //				query.executeUpdate();
-				
+
 				ss.createQuery("DELETE FROM Product WHERE id = :id").setParameter("id", id).executeUpdate();
 			}
 			trans.commit();
@@ -126,6 +126,25 @@ public class ProductDAO {
 				trans.rollback();
 			e.printStackTrace();
 			// TODO: handle exception
+		}
+	}
+
+	public void updateProduct(Product product) {
+		Transaction trans = null;
+		try (Session ss = HibernateUtil.getSessionFactory().openSession()) {
+			trans = ss.beginTransaction();
+			String hql = "UPDATE Product SET description = :description, name = :name, price = :price , category_id = :category_id WHERE id = :id";
+			Query query = ss.createQuery(hql);
+			query.setParameter("description", product.getDescription()).setParameter("name", product.getName())
+					.setParameter("price", product.getPrice()).setParameter("category_id", product.getCategory())
+					.setParameter("id", product.getId());
+			query.executeUpdate();
+			trans.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			if (trans != null)
+				trans.rollback();
+			e.printStackTrace();
 		}
 	}
 }
