@@ -8,7 +8,7 @@ $(document).ready(function() {
             cart.addClass('shake');
             setTimeout(function() {
                 cart.removeClass('shake');
-            }, 500)
+            }, 1500)
         }, 0)
     })
 })

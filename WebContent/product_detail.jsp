@@ -152,4 +152,7 @@
 			</div>
 </body>
 
+<script type="text/javascript" src="js/addtocart.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+
 </html>

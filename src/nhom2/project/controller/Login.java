@@ -62,13 +62,12 @@ public class Login extends HttpServlet {
 		}
 		req.getSession().setAttribute("loggedIn", customer);
 		req.setAttribute("message", message);
-		if(req.getParameter("message")!=null)req.setAttribute("message", message);
+		if (req.getParameter("message") != null)
+			req.setAttribute("message", message);
 		System.out.println(url);
-		
-
+		System.out.println(action);
 
 	}
-
 
 	public void Add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Customer customer = null;
@@ -78,11 +77,15 @@ public class Login extends HttpServlet {
 		String confirm = request.getParameter("confirmpassword");
 		if (email == null || email.equals("") || password == null || password.equals("")) {
 			message = "Xin hãy nhập lại tài khoản và mật khẩu!";
+			
 		} else if (!password.equals(confirm)) {
 			message = "Mật khẩu xác nhận không trùng khớp. Vui lòng nhập lại!";
+			
 		} else {
-			if (customerDAO.checkCustomerExist(email))
+			if (customerDAO.checkCustomerExist(email)) {
 				message = "Tài khoản đã tồn tại! Vui lòng thử một tài khoản khác!";
+			}
+
 			else {
 				customer = new Customer();
 				customer.setEmail(email);
@@ -106,6 +109,8 @@ public class Login extends HttpServlet {
 				}
 			}
 		}
+		request.setAttribute("message", message);
+		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 
 	public void Signin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -132,6 +137,7 @@ public class Login extends HttpServlet {
 		} else {
 			message = "Tài khoản không tồn tại!";
 		}
+		request.setAttribute("message", message);
 		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 }

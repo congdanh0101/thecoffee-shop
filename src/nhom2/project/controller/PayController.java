@@ -51,6 +51,8 @@ public class PayController extends HttpServlet{
 			billDAO.saveBill(bill);
 			cart.insertBillDetail(bill);		
 			ss.removeAttribute("cart");
+			
+			ss.removeAttribute("size");
 			request.getRequestDispatcher("/result.jsp").forward(request, response);
 		}
 		

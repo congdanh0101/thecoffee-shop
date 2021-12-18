@@ -31,6 +31,7 @@ public class CartController extends HttpServlet {
 	private ProductDAO productDAO;
 	private SizeDAO sizeDAO;
 	private ToppingDAO toppingDAO;
+	private int sizeOfCart;
 	
     public CartController() {
         super();
@@ -102,6 +103,12 @@ public class CartController extends HttpServlet {
         } else if (quantity == 0) {
             cart.removeItem(lineItem);
         }
+        int sizeofCart = 0;
+        
+        if(!cart.getItems().isEmpty())sizeofCart = cart.getCount();
+        
+        session.setAttribute("size", sizeofCart);
+        System.out.println(cart.getCount());
         session.setAttribute("cart", cart);
         
         String path = getServletContext().getContextPath();
