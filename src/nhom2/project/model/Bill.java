@@ -31,7 +31,10 @@ public class Bill {
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "bill")
 	private List<BillDetail> listBillDetail;
-	
+
+	@ManyToOne
+	private Status status;
+
 	private String comment;
 
 	public Bill() {
@@ -39,25 +42,32 @@ public class Bill {
 		comment = "";
 	}
 
-	public Bill(Date date, Date time, Customer customer,String comment) {
+	public Bill(Date date, Date time, Customer customer, String comment, Status status) {
 		super();
 		this.date = date;
 		this.time = time;
 		this.customer = customer;
 		this.comment = comment;
-
+		this.status = status;
 	}
 
-	public Bill(int id, Date date, Date time, Customer customer,String comment) {
+	public Bill(int id, Date date, Date time, Customer customer, String comment, Status status) {
 		super();
 		this.id = id;
 		this.time = time;
 		this.date = date;
 		this.customer = customer;
-		this.comment=comment;
+		this.comment = comment;
+		this.status = status;
 	}
-	
-	
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public String getComment() {
 		return comment;
@@ -106,7 +116,5 @@ public class Bill {
 	public void setListBillDetail(List<BillDetail> listBillDetail) {
 		this.listBillDetail = listBillDetail;
 	}
-
-	
 
 }

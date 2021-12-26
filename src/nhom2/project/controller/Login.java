@@ -62,10 +62,9 @@ public class Login extends HttpServlet {
 		}
 		req.getSession().setAttribute("loggedIn", customer);
 		req.setAttribute("message", message);
-		if (req.getParameter("message") != null)
-			req.setAttribute("message", message);
 		System.out.println(url);
 		System.out.println(action);
+		getServletContext().getRequestDispatcher(url).forward(req, resp);
 
 	}
 
@@ -77,10 +76,10 @@ public class Login extends HttpServlet {
 		String confirm = request.getParameter("confirmpassword");
 		if (email == null || email.equals("") || password == null || password.equals("")) {
 			message = "Xin hãy nhập lại tài khoản và mật khẩu!";
-			
+
 		} else if (!password.equals(confirm)) {
 			message = "Mật khẩu xác nhận không trùng khớp. Vui lòng nhập lại!";
-			
+
 		} else {
 			if (customerDAO.checkCustomerExist(email)) {
 				message = "Tài khoản đã tồn tại! Vui lòng thử một tài khoản khác!";
@@ -105,12 +104,12 @@ public class Login extends HttpServlet {
 				if (test) {
 					HttpSession session = request.getSession();
 					session.setAttribute("customer", customer);
-					response.sendRedirect("verify.jsp");
+					getServletContext().getRequestDispatcher("/verify.jsp").forward(request, response);
 				}
 			}
 		}
 		request.setAttribute("message", message);
-		getServletContext().getRequestDispatcher(url).forward(request, response);
+//		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 
 	public void Signin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -126,7 +125,13 @@ public class Login extends HttpServlet {
 			customer = customerDAO.getCustomerByEmail(email);
 			if (password.equals(customer.getPassword())) {
 				message = "Đăng nhập thành công!";
-				url = "/home";
+				if (customer.getName() != "" && customer.getAddress() != "" && customer.getPhone() != ""
+						&& customer.getDistrict() != "" && customer.getWard() != "" && customer.getName() != null
+						&& customer.getAddress() != null && customer.getPhone() != null
+						&& customer.getDistrict() != null && customer.getWard() != null)
+					url = "/home";
+				else
+					url = "/account.jsp";
 				HttpSession session = request.getSession();
 				session.setAttribute("loggedIn", customer);
 				session.setAttribute("customer", customer);
@@ -138,6 +143,6 @@ public class Login extends HttpServlet {
 			message = "Tài khoản không tồn tại!";
 		}
 		request.setAttribute("message", message);
-		getServletContext().getRequestDispatcher(url).forward(request, response);
+
 	}
 }

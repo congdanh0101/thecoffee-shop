@@ -33,7 +33,6 @@ public class BillDAO {
 		}
 	}
 
-
 	public void deleteBill(int id) {
 		Transaction trans = null;
 		try (Session ss = HibernateUtil.getSessionFactory().openSession()) {
@@ -83,6 +82,71 @@ public class BillDAO {
 		return null;
 	}
 
-	
-	
+	@SuppressWarnings("rawtypes")
+	public Bill getBillByStatus(int sid) {
+		Bill bill = null;
+		Transaction trans = null;
+		try (Session ss = HibernateUtil.getSessionFactory().openSession()) {
+			trans = ss.beginTransaction();
+			String hql = "FROM Bill B WHERE B.status = :status";
+			Query query = ss.createQuery(hql);
+			query.setParameter("status", sid);
+			List result = query.getResultList();
+			if (result != null && !result.isEmpty()) {
+				bill = (Bill) result.get(0);
+			}
+			trans.commit();
+		} catch (Exception e) {
+			if (trans != null)
+				trans.rollback();
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		return bill;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Bill> getAllBillOrderByStatus() {
+		try {
+			return HibernateUtil.getSessionFactory().openSession().createQuery("FROM Bill ORDER BY status ASC")
+					.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		return null;
+	}
+
+	@SuppressWarnings({ "unchecked", "deprecation" })
+	public List<Bill> getAllBillByStatus(int sid) {
+		try {
+			return HibernateUtil.getSessionFactory().openSession().createQuery("FROM Bill AS B WHERE B.status = ?1")
+					.setInteger(1, sid).getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+
+		return null;
+	}
+
+	public void updateBill(Bill bill) {
+		Transaction trans = null;
+		try (Session ss = HibernateUtil.getSessionFactory().openSession()) {
+			trans = ss.beginTransaction();
+			String hql = "UPDATE Bill SET status_id = :status_id WHERE id = :id";
+			Query query = ss.createQuery(hql);
+			query.setParameter("status_id", bill.getStatus()).setParameter("id", bill.getId());
+			query.executeUpdate();
+			trans.commit();
+		} catch (Exception e) {
+			if (trans != null)
+				trans.rollback();
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+	}
+
 }

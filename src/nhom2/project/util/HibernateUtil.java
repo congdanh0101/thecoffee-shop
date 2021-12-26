@@ -7,6 +7,7 @@ import nhom2.project.model.BillDetail;
 import nhom2.project.model.Category;
 import nhom2.project.model.Customer;
 import nhom2.project.model.Size;
+import nhom2.project.model.Status;
 
 import java.util.Properties;
 
@@ -45,6 +46,7 @@ public class HibernateUtil {
 				configuration.addAnnotatedClass(Category.class);
 				configuration.addAnnotatedClass(Topping.class);
 				configuration.addAnnotatedClass(Size.class);
+				configuration.addAnnotatedClass(Status.class);
 				configuration.addAnnotatedClass(Customer.class);
 				configuration.addAnnotatedClass(Bill.class);
 				configuration.addAnnotatedClass(BillDetail.class);
@@ -72,9 +74,9 @@ public class HibernateUtil {
 //				Properties settings = new Properties();
 //
 //				settings.put(Environment.DRIVER, "org.postgresql.Driver");
-//				settings.put(Environment.URL, "jdbc:postgresql://ec2-18-213-133-45.compute-1.amazonaws.com:5432/dc1pt3dq06kj79?useUnicode=yes&amp;characterEncoding=utf8");
-//				settings.put(Environment.USER, "atheigfpezysjh");
-//				settings.put(Environment.PASS, "4a8f7005fb5d2f9c6c85cd3c04eeeed226aa5a2ac35ab5f90d159faa7237fd8c");
+//				settings.put(Environment.URL, "jdbc:postgresql://ec2-52-2-93-12.compute-1.amazonaws.com:5432/d5na3q7odm12j2?useUnicode=yes&amp;characterEncoding=utf8");
+//				settings.put(Environment.USER, "aqfezsvojlmdaj");
+//				settings.put(Environment.PASS, "a5a9f0722e3e7bf2775e7cfbecd953c32c3215f9d187ed8ee2edb64702a5fa71");
 //				settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
 //				settings.put(Environment.SHOW_SQL, "true");
 //				settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -86,6 +88,7 @@ public class HibernateUtil {
 //				configuration.addAnnotatedClass(Topping.class);
 //				configuration.addAnnotatedClass(Size.class);
 //				configuration.addAnnotatedClass(Customer.class);
+//				configuration.addAnnotatedClass(Status.class);
 //				configuration.addAnnotatedClass(Bill.class);
 //				configuration.addAnnotatedClass(BillDetail.class);
 //

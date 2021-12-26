@@ -17,12 +17,14 @@ import nhom2.project.data.BillDetailDAO;
 import nhom2.project.data.CategoryDAO;
 import nhom2.project.data.CustomerDAO;
 import nhom2.project.data.ProductDAO;
+import nhom2.project.data.StatusDAO;
 import nhom2.project.model.Bill;
 import nhom2.project.model.BillDetail;
 import nhom2.project.model.Cart;
 import nhom2.project.model.Category;
 import nhom2.project.model.Customer;
 import nhom2.project.model.Product;
+import nhom2.project.model.Status;
 
 @WebServlet("/admin")
 public class AdminController extends HttpServlet {
@@ -32,6 +34,7 @@ public class AdminController extends HttpServlet {
 	private BillDetailDAO billdetailDAO;
 	private ProductDAO productDAO;
 	private CategoryDAO categoryDAO;
+	private StatusDAO statusDAO;
 
 
 	public AdminController() {
@@ -41,6 +44,7 @@ public class AdminController extends HttpServlet {
 		billdetailDAO = new BillDetailDAO();
 		productDAO = new ProductDAO();
 		categoryDAO = new CategoryDAO();
+		statusDAO = new StatusDAO();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -79,8 +83,11 @@ public class AdminController extends HttpServlet {
 
 		List<Customer> listCustomer = new ArrayList<Customer>();
 		listCustomer = customerDAO.getAllCustomer();
+		
+		List<Status> listStatus = new ArrayList<Status>();
+		listStatus = statusDAO.getAllStatus();
 
-
+		request.setAttribute("listStatus", listStatus);
 		request.setAttribute("listBill", listBill);
 		request.setAttribute("listCustomer", listCustomer);
 		request.setAttribute("listCategory", listCategory);

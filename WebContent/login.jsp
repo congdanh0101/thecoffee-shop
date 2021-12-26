@@ -29,7 +29,7 @@
             <h1>Đăng Nhập</h1>
             <input type="email" name="email" placeholder="Email"/>
             <input type="password" name="password" placeholder="Mật khẩu"/>
-            <a href="reset_password">Quên mật khẩu ?</a>
+            <!-- <a href="reset_password">Quên mật khẩu ?</a> -->
             <button type="submit" id="btn2" class="btn2 btn-submit">Đăng Nhập</button>
             <c:if test="${not empty message}">
                 <script>
