@@ -26,6 +26,7 @@ public class EmailUtils {
         properties.put("mail.smtp.port", port);
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.mime.charset", "UTF-8");
  
         // creates a new session with an authenticator
         Authenticator auth = new Authenticator() {
@@ -37,14 +38,16 @@ public class EmailUtils {
         Session session = Session.getInstance(properties, auth);
  
         // creates a new e-mail message
-        Message msg = new MimeMessage(session);
+        MimeMessage msg = new MimeMessage(session);
  
         msg.setFrom(new InternetAddress(email));
         InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
         msg.setRecipients(Message.RecipientType.TO, toAddresses);
-        msg.setSubject(subject);
+        msg.setSubject(subject,"UTF-8");
         msg.setSentDate(new Date());
-        msg.setText(message);
+//        msg.setText(message,"UTF-8");
+        msg.setContent(message,"text/html;charset=UTF-8");
+        
  
         try {
             // sends the e-mail

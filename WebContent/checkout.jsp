@@ -20,11 +20,18 @@
 <script src="https://kit.fontawesome.com/4666aa241a.js"
 	crossorigin="anonymous"></script>
 <title>The Coffee Shop</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png" type="image/x-icon">
+<link rel="icon"
+	href="https://cdn-icons-png.flaticon.com/512/2120/2120197.png"
+	type="image/x-icon">
 </head>
 <body>
 <body>
 	<jsp:include page="navbar_shop.jsp"></jsp:include>
+	<c:choose>
+		<c:when test="${customer.getName() != null
+						&& customer.getAddress() != null && customer.getPhone() != null
+						&& customer.getDistrict() != null && customer.getWard() != null}">
+			
 	<form action="${pageContext.request.contextPath}/pay" method="post">
 		<div class="container">
 			<div class="row">
@@ -33,42 +40,49 @@
 					<h2>Thông tin cá nhân:</h2>
 					<div class="panel panel-default">
 						<div class="panel-body form-horizontal payment-form">
-							
-								<div class="form-group">
-									<label for="concept" class="col-sm-3 control-label">Họ và tên</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" id="fullName"
-											name="fullName" required value="${customer.name }" readonly="readonly">
-									</div>
+
+							<div class="form-group">
+								<label for="concept" class="col-sm-3 control-label">Họ
+									và tên</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="fullName"
+										name="fullName" required value="${customer.name }"
+										readonly="readonly">
 								</div>
-								<div class="form-group">
-									<label for="description" class="col-sm-3 control-label">Email</label>
-									<div class="col-sm-9">
-										<input type="email" class="form-control" id="email"
-											name="email" required readonly="readonly" value="${customer.email }">
-									</div>
+							</div>
+							<div class="form-group">
+								<label for="description" class="col-sm-3 control-label">Email</label>
+								<div class="col-sm-9">
+									<input type="email" class="form-control" id="email"
+										name="email" required readonly="readonly"
+										value="${customer.email }">
 								</div>
-								<div class="form-group">
-									<label for="amount" class="col-sm-3 control-label">Số điện thoại</label>
-									<div class="col-sm-9">
-										<input type="number" class="form-control" id="phoneNumber"
-											name="phoneNumber" required min="100000000" max="9999999999" readonly="readonly" value="${customer.phone }">
-									</div>
+							</div>
+							<div class="form-group">
+								<label for="amount" class="col-sm-3 control-label">Số
+									điện thoại</label>
+								<div class="col-sm-9">
+									<input type="number" class="form-control" id="phoneNumber"
+										name="phoneNumber" required min="100000000" max="9999999999"
+										readonly="readonly" value="${customer.phone }">
 								</div>
-								<%
-									HttpSession ss = request.getSession();
-									Customer customer = (Customer) ss.getAttribute("customer");
-									String address = customer.getAddress() + ", " + customer.getWard() +  ", "+ customer.getDistrict()+ ", " + customer.getCity();
-								%>
-								<div class="form-group">
-									<label for="status" class="col-sm-3 control-label">Địa chỉ</label>
-									<div class="col-sm-9">
-										<input type="text" class="form-control" id="address"
-											name="address" required readonly="readonly" value = "<%= address %>"
-											>
-									</div>
+							</div>
+							<%
+								HttpSession ss = request.getSession();
+							Customer customer = (Customer) ss.getAttribute("customer");
+							String address = customer.getAddress() + ", " + customer.getWard() + ", " + customer.getDistrict() + ", "
+									+ customer.getCity();
+							%>
+							<div class="form-group">
+								<label for="status" class="col-sm-3 control-label">Địa
+									chỉ</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="address"
+										name="address" required readonly="readonly"
+										value="<%=address%>">
 								</div>
-								<!-- <div class="form-group">
+							</div>
+							<!-- <div class="form-group">
 									<label for="status" class="col-sm-3 control-label">Ghi chú</label>
 									<div class="col-sm-9">
 										<textarea name="comment" id="" cols="30" rows="5"
@@ -76,22 +90,22 @@
 									</div>
 								</div> -->
 
-								<div class="form-group">
-									<div class="col-sm-12 text-right">
-										<a href="cart.jsp">
+							<div class="form-group">
+								<div class="col-sm-12 text-right">
+									<a href="cart.jsp">
 										<button type="button"
 											class="btn btn-default preview-add-button">
 											<span class="fas fa-cart-plus"></span> Quay lại giỏ hàng
 										</button>
 									</a>
-										<!-- <button type="submit" class=" btn btn-primary btn-block "
+									<!-- <button type="submit" class=" btn btn-primary btn-block "
 											style="width: 150px; padding: 5px 0; font-size: 1.5rem;">Submit
 											all</button> -->
-									</div>
-
 								</div>
 
-							
+							</div>
+
+
 
 						</div>
 					</div>
@@ -118,10 +132,9 @@
 												<td>${item.product.name }<br /> <br /> <img
 													src="${item.product.image }" style="width: 100px" alt="" />
 												</td>
-												<td>
-												Size: ${item.size.name } <br />
-												Topping: ${item.topping.name }
-												
+												<td>Size: ${item.size.name } <br /> Topping:
+													${item.topping.name }
+
 												</td>
 												<td>${item.quantity }</td>
 												<td style="font-weight: bold;">${item.getPriceCurrencyFormat() }</td>
@@ -156,15 +169,21 @@
 						<hr style="border: 1px dashed #dddddd;">
 						<div class="col-xs-12"
 							style="margin-left: 77.5%; margin-top: 1rem;">
-							
-								<button type="submit" class=" btn btn-primary btn-block "
-									style="width: 150px; padding: 5px 0; font-size: 1.5rem;">Xác nhận</button>
+
+							<button type="submit" class=" btn btn-primary btn-block "
+								style="width: 150px; padding: 5px 0; font-size: 1.5rem;">Xác
+								nhận</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</form>
+		</c:when>
+		<c:otherwise>
+		<% request.getRequestDispatcher("/account.jsp").forward(request, response); %>
+		</c:otherwise>
+	</c:choose>
 
 </body>
 </body>

@@ -16,22 +16,20 @@ import nhom2.project.model.Customer;
 
 @WebServlet("/account")
 public class AccountController extends HttpServlet {
-	
+
 	private CustomerDAO customerDAO;
-	
-	public AccountController(){
+
+	public AccountController() {
 		super();
 		customerDAO = new CustomerDAO();
 	}
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		int id = Integer.parseInt(request.getParameter("cid"));
-		
-		
+
 		String name = request.getParameter("fullName");
 //		String email = request.getParameter("email");
 		String phone = request.getParameter("phoneNumber");
@@ -40,31 +38,32 @@ public class AccountController extends HttpServlet {
 		JSONObject jsDistrict = new JSONObject(requsetdistrict);
 		Object objDistrict = jsDistrict.get("name");
 		String district = (String) objDistrict;
-		
+
 		String requestward = request.getParameter("ward");
 		JSONObject jsWard = new JSONObject(requestward);
 		Object objWard = jsWard.get("name");
 		String ward = (String) objWard;
 		String add = request.getParameter("address");
-		
-		
 
 		String address = add + ", " + ward + ", " + district + ", TPHCM";
 
 		Customer customer = customerDAO.getCustomer(id);
-		customer.setName(name);
-//		customer.setEmail(email);
-		customer.setPhone(phone);
-		customer.setAddress(add);
-		customer.setCity("TPHCM");
-		customer.setDistrict(district);
-		customer.setWard(ward);
-		customerDAO.updateCustomer(customer);
-		
-		HttpSession ss = request.getSession();
-		ss.setAttribute("customer", customer);
-		ss.setAttribute("address", address);
-		request.setAttribute("customerUpdate", customer);
+		if (name != null && name != "" && phone != null && phone != "" && add != null && add != "" && district != null
+				&& district != "" && ward != null && ward != "") {
+
+			customer.setName(name);
+			customer.setPhone(phone);
+			customer.setAddress(add);
+			customer.setCity("TPHCM");
+			customer.setDistrict(district);
+			customer.setWard(ward);
+			customerDAO.updateCustomer(customer);
+			HttpSession ss = request.getSession();
+			ss.setAttribute("customer", customer);
+			ss.setAttribute("address", address);
+			request.setAttribute("customerUpdate", customer);
+		}
+
 		getServletContext().getRequestDispatcher("/account.jsp").forward(request, response);
 	}
 
@@ -72,6 +71,5 @@ public class AccountController extends HttpServlet {
 			throws ServletException, IOException {
 		doPost(request, response);
 	}
-	
 
 }

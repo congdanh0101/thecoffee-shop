@@ -14,31 +14,39 @@ import javax.servlet.http.HttpSession;
 
 import nhom2.project.data.ProductDAO;
 import nhom2.project.model.Cart;
+import nhom2.project.model.Customer;
 import nhom2.project.model.LineItem;
 import nhom2.project.model.Product;
-
-
 
 @WebServlet("/checkout")
 public class CheckoutController extends HttpServlet {
 	private ProductDAO productDAO;
 
-    public CheckoutController() {
-        super();
-        // TODO Auto-generated constructor stub
-        productDAO = new ProductDAO();
-    }
-	
-	
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ServletContext sc = getServletContext(); 
-        HttpSession session = req.getSession();
-        sc.getRequestDispatcher("/checkout.jsp").forward(req, resp);
-       
+	public CheckoutController() {
+		super();
+		// TODO Auto-generated constructor stub
+		productDAO = new ProductDAO();
 	}
-	
+
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ServletContext sc = getServletContext();
+		HttpSession session = req.getSession();
+		Customer customer = (Customer) session.getAttribute("customer");
+		System.out.println(customer);
+		if (customer != null) {
+			if (customer.getName() != "" && customer.getAddress() != "" && customer.getPhone() != ""
+					&& customer.getDistrict() != "" && customer.getWard() != "" && customer.getName() != null
+					&& customer.getAddress() != null && customer.getPhone() != null && customer.getDistrict() != null
+					&& customer.getWard() != null)
+				sc.getRequestDispatcher("/checkout.jsp").forward(req, resp);
+			else
+				sc.getRequestDispatcher("/account.jsp").forward(req, resp);
+		}
+
+	}
+
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		doPost(req, resp);
 	}
 }

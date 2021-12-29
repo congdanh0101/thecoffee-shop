@@ -34,7 +34,7 @@
 			<h2>Your information:</h2>
 			<div class="panel-default">
 				<div class="panel-body form-horizontal payment-form">
-					<form action="account" method="post">
+					<form action="account" method="post" name="info">
 						<div class="form-group">
 							<label for="concept" class="col-sm-4 control-label">Họ và
 								Tên</label>
@@ -67,11 +67,11 @@
 							<div class="col-sm-5"
 								style="display: inline-flex; justify-content: space-between;">
 								<!-- <input type="text" class="form-control" id="address" name="address" required> -->
-								<select name="city" id="" class="form-control" required style="width: 0%; display: none;">
-                                    <option value="TPHCM">TPHCM</option>
-                                    <!-- <option value="">3</option> -->
-                                </select>
-								<select name="district" id="district" class="form-control"
+								<select name="city" id="" class="form-control" required
+									style="width: 0%; display: none;">
+									<option value="TPHCM">TPHCM</option>
+									<!-- <option value="">3</option> -->
+								</select> <select name="district" id="district" class="form-control"
 									required style="width: 45%;" onchange="myFunction()">
 									<option value="${customer.district}" selected>${customer.district }</option>
 								</select> <select name="ward" id="ward" class="form-control" required
@@ -91,16 +91,18 @@
 							</div>
 						</div>
 
-						
+
 
 						<div class="form-group">
 							<div class="col-sm-9 text-right">
 
-								<button type="submit" class="btn btn-default preview-add-button"
-									onclick="success()">
-									<!-- <span class="fas fa-cart-plus"></span>  -->
-									Update
-								</button>
+
+								<button type="submit"
+											class="btn btn-default preview-add-button"
+											onclick="noti()">
+											<!-- <span class="fas fa-cart-plus"></span>  -->
+											Update
+										</button>
 
 								<!-- <button type="submit" class=" btn btn-primary btn-block "
                                         style="width: 150px; padding: 5px 0; font-size: 1.5rem;">Submit
@@ -113,10 +115,25 @@
 
 						<input type="hidden" name="cid" value="${customer.id }" />
 						<script>
-                            function success() {
-                                alert("Cập nhật thành công!");
-                            }
-                        </script>
+							function success() {
+								alert("Cập nhật thành công!");
+							}
+							function failed() {
+								alert("Vui lòng điền đủ thông tin!");
+							}
+							function noti(){
+								var name = document.forms["info"]["fullName"].value;
+								var phoneNumber = document.forms["info"]["phoneNumber"].value;
+								var district= document.forms["info"]["district"].value;
+								var ward =document.forms["info"]["ward"].value;
+								var address= document.forms["info"]["address"].value;
+								if(name =="" || phoneNumber==""||district==""||ward==""||address==""){
+									alert("Vui lòng điền đủ thông tin!");
+								}else{
+									alert("Cập nhật thành công!");
+								}
+							}
+						</script>
 					</form>
 
 				</div>
