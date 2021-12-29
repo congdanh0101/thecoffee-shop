@@ -93,8 +93,8 @@ public class Login extends HttpServlet {
 
 				boolean test;
 				try {
-					test = EmailUtils.sendEmail(host, port, username, pass, email, "Email Verification",
-							"Registered successfully.Please verify your account using this code: "
+					test = EmailUtils.sendEmail(host, port, username, pass, email, "Xác minh tài khoản",
+							"Đăng ký tài khoản thành công. Vui lòng nhập mã xác thực sau để kích hoạt tài khoản: "
 									+ customer.getCode());
 				} catch (MessagingException e) {
 					// TODO Auto-generated catch block
