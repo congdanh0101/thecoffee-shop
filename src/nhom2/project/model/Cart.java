@@ -105,8 +105,9 @@ public class Cart implements Serializable {
 //			str+= item.getTotalCurrencyFormat();
 //			str+="\n";
 		}
+		html+="<td><h3>Phí vận chuyển</h3></td><td></td><td></td><td></td><td></td><td><h3>25,000 VNĐ</h3></td>";
 		html+="</tbody></table><br><br><hr>";
-		html+= "<h2 style=\"color: red;\">Tổng cộng: "+getSubTotalCurrencyFormat() +"</h2>";
+		html+= "<h2 style=\"color: red;\">Tổng cộng: "+getSubTotalCurrencyFormatIncludeShip() +"</h2>";
 		return html;
 	}
 	
